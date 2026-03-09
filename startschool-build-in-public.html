@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Build in Public — Start School Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue:      #0d3d6e;
+      --blue-mid:  #1565c0;
+      --blue-light:#29b6f6;
+      --cyan:      #00c8e0;
+      --white:     #ffffff;
+      --cream:     #f7f9fc;
+      --text:      #1a2e44;
+      --muted:     #607d9b;
+      --border:    #dde8f5;
+      --grad:      linear-gradient(135deg,#0d3d6e,#1565c0,#29b6f6);
+      --grad-soft: linear-gradient(135deg,#e8f4ff,#d0eaff);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      background:var(--white);
+      color:var(--text);
+      font-family:'Plus Jakarta Sans',sans-serif;
+      font-size:16px;
+      line-height:1.65;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar{
+      position:fixed;top:0;left:0;height:3px;
+      background:var(--grad);z-index:999;
+      width:0%;transition:width 0.1s linear;
+    }
+
+    /* ── SIDE NAV ── */
+    .side-nav{
+      position:fixed;left:0;top:0;bottom:0;
+      width:220px;
+      background:var(--blue);
+      display:flex;flex-direction:column;
+      padding:32px 0;
+      z-index:100;
+      overflow:hidden;
+    }
+    .side-nav::before{
+      content:'';
+      position:absolute;inset:0;
+      background:radial-gradient(ellipse at 50% 80%,rgba(41,182,246,0.12),transparent 65%);
+    }
+    .side-logo{
+      padding:0 24px 28px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      margin-bottom:20px;
+      position:relative;z-index:1;
+    }
+    .side-logo-top{
+      font-family:'Inter',sans-serif;
+      font-size:1rem;font-weight:700;
+      color:#fff;line-height:1.2;
+    }
+    .side-logo-sub{
+      font-size:0.65rem;font-weight:500;
+      letter-spacing:0.12em;text-transform:uppercase;
+      color:rgba(255,255,255,0.4);margin-top:3px;
+    }
+    .side-guide-label{
+      padding:0 24px 14px;
+      font-size:0.62rem;font-weight:600;
+      letter-spacing:0.16em;text-transform:uppercase;
+      color:rgba(255,255,255,0.3);
+      position:relative;z-index:1;
+    }
+    .nav-items{
+      list-style:none;
+      flex:1;overflow-y:auto;
+      position:relative;z-index:1;
+    }
+    .nav-items::-webkit-scrollbar{width:3px;}
+    .nav-items::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);}
+    .nav-item a{
+      display:flex;align-items:center;gap:12px;
+      padding:10px 24px;
+      text-decoration:none;
+      font-size:0.82rem;font-weight:500;
+      color:rgba(255,255,255,0.45);
+      transition:color 0.2s,background 0.2s;
+      position:relative;
+    }
+    .nav-item a:hover{color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.05);}
+    .nav-item.active a{
+      color:#fff;background:rgba(255,255,255,0.08);
+    }
+    .nav-item.active a::before{
+      content:'';
+      position:absolute;left:0;top:0;bottom:0;
+      width:3px;background:var(--blue-light);border-radius:0 2px 2px 0;
+    }
+    .nav-num{
+      font-size:0.65rem;font-weight:600;
+      color:rgba(255,255,255,0.2);
+      min-width:18px;
+    }
+    .nav-item.active .nav-num{color:var(--blue-light);}
+    .side-progress{
+      padding:20px 24px 0;
+      border-top:1px solid rgba(255,255,255,0.08);
+      position:relative;z-index:1;
+    }
+    .side-progress-label{
+      font-size:0.62rem;font-weight:600;
+      letter-spacing:0.1em;text-transform:uppercase;
+      color:rgba(255,255,255,0.3);margin-bottom:8px;
+    }
+    .side-progress-bar{
+      height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;
+    }
+    .side-progress-fill{
+      height:100%;background:var(--grad);border-radius:2px;
+      width:0%;transition:width 0.3s ease;
+    }
+    .side-progress-pct{
+      font-size:0.72rem;font-weight:600;
+      color:rgba(255,255,255,0.35);margin-top:6px;
+    }
+
+    /* ── MAIN ── */
+    .main{margin-left:220px;}
+
+    /* ── HERO ── */
+    .hero{
+      min-height:100vh;
+      background:var(--grad);
+      display:flex;flex-direction:column;
+      justify-content:flex-end;
+      padding:80px 72px 72px;
+      position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Ccircle cx='40' cy='40' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-tag{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
+      padding:6px 16px;border-radius:50px;
+      font-size:0.7rem;font-weight:600;letter-spacing:0.12em;
+      text-transform:uppercase;color:rgba(255,255,255,0.75);
+      margin-bottom:32px;position:relative;z-index:1;
+      width:fit-content;
+    }
+    .hero-tag-dot{
+      width:6px;height:6px;border-radius:50%;
+      background:var(--blue-light);
+      animation:blink 2s ease-in-out infinite;
+    }
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+    .hero h1{
+      font-family:'Inter',sans-serif;
+      font-size:clamp(3.2rem,6.5vw,6rem);
+      font-weight:900;line-height:0.95;
+      letter-spacing:-0.04em;color:#fff;
+      position:relative;z-index:1;
+      margin-bottom:28px;
+    }
+    .hero h1 span{
+      display:block;color:rgba(255,255,255,0.45);
+      font-size:0.72em;font-weight:700;letter-spacing:-0.01em;
+    }
+    .hero-sub{
+      font-size:1.05rem;color:rgba(255,255,255,0.65);
+      max-width:520px;line-height:1.75;
+      position:relative;z-index:1;margin-bottom:44px;
+    }
+    .hero-meta{
+      display:flex;align-items:center;gap:28px;
+      position:relative;z-index:1;
+    }
+    .hero-meta-item{
+      display:flex;align-items:center;gap:8px;
+      font-size:0.82rem;color:rgba(255,255,255,0.5);font-weight:500;
+    }
+    .hero-meta-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.25);}
+    .hero-scroll{
+      position:absolute;bottom:32px;right:72px;z-index:1;
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      opacity:0.3;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:#fff;
+    }
+    .scroll-line{
+      width:1px;height:40px;background:#fff;
+      animation:grow 1.8s ease-in-out infinite;
+    }
+    @keyframes grow{
+      0%{transform:scaleY(0);transform-origin:top;}
+      50%{transform:scaleY(1);transform-origin:top;}
+      51%{transform:scaleY(1);transform-origin:bottom;}
+      100%{transform:scaleY(0);transform-origin:bottom;}
+    }
+
+    /* ── SECTIONS ── */
+    .guide-section{
+      padding:96px 72px;
+      border-bottom:1px solid var(--border);
+    }
+    .guide-section:last-of-type{border-bottom:none;}
+    .guide-section.alt-bg{background:var(--cream);}
+
+    .section-num{
+      font-family:'Inter',sans-serif;
+      font-size:4.5rem;font-weight:900;
+      color:var(--border);line-height:1;
+      margin-bottom:-16px;
+      display:block;letter-spacing:-0.04em;
+    }
+    .section-label{
+      font-size:0.68rem;font-weight:600;
+      letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--blue-light);margin-bottom:10px;display:block;
+    }
+    .section-title{
+      font-family:'Inter',sans-serif;font-weight:800;
+      font-size:clamp(1.9rem,3.5vw,2.9rem);
+      line-height:1.05;letter-spacing:-0.03em;
+      color:var(--blue);margin-bottom:18px;
+    }
+    .section-title em{font-style:normal;color:var(--blue-mid);font-weight:900;}
+    .section-lead{
+      font-size:1.05rem;color:var(--muted);
+      max-width:600px;line-height:1.8;margin-bottom:52px;
+    }
+
+    /* two-col layout */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+    .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+
+    /* ── CARDS ── */
+    .card{
+      background:var(--white);border:1.5px solid var(--border);
+      border-radius:18px;padding:28px 26px;
+      transition:border-color 0.25s,box-shadow 0.25s,transform 0.2s;
+    }
+    .card:hover{
+      border-color:var(--blue-light);
+      box-shadow:0 8px 36px rgba(21,101,192,0.09);
+      transform:translateY(-3px);
+    }
+    .card.blue{background:var(--grad);border-color:transparent;}
+    .card.soft{background:var(--grad-soft);border-color:transparent;}
+
+    .card-icon{
+      width:44px;height:44px;border-radius:12px;
+      background:var(--grad-soft);
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:16px;
+    }
+    .card-icon svg{width:20px;height:20px;stroke:var(--blue-mid);fill:none;stroke-width:1.8;}
+    .card.blue .card-icon{background:rgba(255,255,255,0.18);}
+    .card.blue .card-icon svg{stroke:#fff;}
+
+    .card h4{
+      font-family:'Inter',sans-serif;
+      font-weight:700;font-size:1.05rem;letter-spacing:-0.02em;
+      color:var(--blue);margin-bottom:8px;line-height:1.25;
+    }
+    .card.blue h4{color:#fff;}
+    .card p{font-size:0.87rem;color:var(--muted);line-height:1.7;}
+    .card.blue p{color:rgba(255,255,255,0.7);}
+
+    /* ── EXAMPLE POST ── */
+    .post-example{
+      background:var(--white);
+      border:1.5px solid var(--border);
+      border-radius:18px;overflow:hidden;
+      transition:border-color 0.2s,box-shadow 0.2s;
+    }
+    .post-example:hover{
+      border-color:var(--blue-light);
+      box-shadow:0 6px 28px rgba(21,101,192,0.08);
+    }
+    .post-header{
+      background:var(--grad-soft);
+      padding:18px 22px;
+      display:flex;align-items:center;gap:12px;
+      border-bottom:1px solid var(--border);
+    }
+    .post-avatar{
+      width:36px;height:36px;border-radius:50%;
+      background:var(--grad);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Inter',sans-serif;font-weight:700;
+      font-size:0.85rem;color:#fff;flex-shrink:0;
+    }
+    .post-handle{font-size:0.82rem;font-weight:600;color:var(--blue);}
+    .post-platform{font-size:0.7rem;color:var(--muted);}
+    .post-body{padding:22px;}
+    .post-text{
+      font-size:0.9rem;color:var(--text);line-height:1.7;
+      white-space:pre-line;
+    }
+    .post-text strong{color:var(--blue);font-weight:600;}
+    .post-tag{
+      display:inline-block;margin-top:14px;
+      font-size:0.68rem;font-weight:600;
+      letter-spacing:0.1em;text-transform:uppercase;
+      background:var(--grad-soft);color:var(--blue-mid);
+      padding:3px 10px;border-radius:50px;
+    }
+    .post-metrics{
+      padding:14px 22px;
+      border-top:1px solid var(--border);
+      display:flex;gap:20px;
+    }
+    .pm{font-size:0.78rem;color:var(--muted);font-weight:500;}
+    .pm strong{color:var(--blue);font-weight:600;}
+
+    /* ── MISTAKE CARD ── */
+    .mistake{
+      display:flex;align-items:flex-start;gap:16px;
+      padding:22px 22px;
+      background:var(--white);
+      border:1.5px solid var(--border);
+      border-radius:14px;
+      transition:border-color 0.2s;
+    }
+    .mistake:hover{border-color:#fca5a5;}
+    .mistake.ok:hover{border-color:var(--blue-light);}
+    .mistake-icon{
+      width:32px;height:32px;border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;font-size:0.9rem;
+    }
+    .mistake-icon.x{background:#fee2e2;}
+    .mistake-icon.check{background:#e0f2fe;}
+    .mistake h5{
+      font-family:'Inter',sans-serif;
+      font-weight:700;font-size:0.98rem;
+      color:var(--blue);margin-bottom:4px;
+    }
+    .mistake p{font-size:0.84rem;color:var(--muted);line-height:1.65;}
+
+    /* ── CHECKLIST ── */
+    .checklist{display:flex;flex-direction:column;gap:12px;}
+    .check-item{
+      display:flex;align-items:flex-start;gap:14px;
+      padding:16px 18px;
+      background:var(--white);border:1.5px solid var(--border);
+      border-radius:12px;cursor:pointer;
+      transition:border-color 0.2s,background 0.2s;
+      user-select:none;
+    }
+    .check-item:hover{border-color:var(--blue-light);}
+    .check-item.done{background:var(--grad-soft);border-color:var(--blue-light);}
+    .check-box{
+      width:22px;height:22px;border-radius:6px;
+      border:2px solid var(--border);flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      transition:all 0.2s;margin-top:1px;
+    }
+    .check-item.done .check-box{
+      background:var(--blue-mid);border-color:var(--blue-mid);
+    }
+    .check-box svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2.5;opacity:0;}
+    .check-item.done .check-box svg{opacity:1;}
+    .check-text{font-size:0.88rem;color:var(--text);line-height:1.6;}
+    .check-item.done .check-text{color:var(--muted);}
+
+    /* ── FRAMEWORK TABLE ── */
+    .fw-table{
+      border:1.5px solid var(--border);border-radius:18px;overflow:hidden;
+      width:100%;
+    }
+    .fw-row{
+      display:grid;grid-template-columns:160px 1fr 1fr;
+      border-bottom:1px solid var(--border);
+    }
+    .fw-row:last-child{border-bottom:none;}
+    .fw-row.header{background:var(--blue);}
+    .fw-cell{
+      padding:16px 20px;font-size:0.87rem;
+      border-right:1px solid var(--border);
+    }
+    .fw-cell:last-child{border-right:none;}
+    .fw-row.header .fw-cell{
+      font-size:0.68rem;font-weight:600;
+      letter-spacing:0.12em;text-transform:uppercase;
+      color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.08);
+    }
+    .fw-cell strong{color:var(--blue);font-weight:600;}
+    .fw-cell:first-child{background:var(--cream);}
+    .fw-row.header .fw-cell:first-child{background:transparent;}
+
+    /* ── PULL QUOTE ── */
+    .pull-quote{
+      background:var(--grad);
+      border-radius:20px;padding:40px 40px;
+      position:relative;overflow:hidden;
+      margin:48px 0;
+    }
+    .pq-mark{
+      font-family:'Inter',sans-serif;
+      font-size:8rem;font-weight:900;color:rgba(255,255,255,0.08);
+      position:absolute;top:-20px;left:24px;line-height:1;
+    }
+    .pq-text{
+      font-family:'Inter',sans-serif;
+      font-size:clamp(1.2rem,2.5vw,1.7rem);
+      font-weight:700;color:#fff;line-height:1.45;
+      position:relative;z-index:1;
+    }
+    .pq-text em{color:rgba(255,255,255,0.5);font-style:normal;font-weight:400;}
+
+    /* ── TIMELINE ── */
+    .timeline{display:flex;flex-direction:column;gap:0;}
+    .tl-item{
+      display:flex;gap:24px;
+      padding-bottom:32px;position:relative;
+    }
+    .tl-item:last-child{padding-bottom:0;}
+    .tl-item::before{
+      content:'';
+      position:absolute;left:19px;top:40px;bottom:0;
+      width:2px;background:var(--border);
+    }
+    .tl-item:last-child::before{display:none;}
+    .tl-dot{
+      width:40px;height:40px;border-radius:50%;
+      background:var(--grad);
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;position:relative;z-index:1;
+      font-family:'Inter',sans-serif;
+      font-weight:700;font-size:0.9rem;color:#fff;
+      box-shadow:0 3px 12px rgba(21,101,192,0.3);
+    }
+    .tl-content{padding-top:8px;}
+    .tl-week{
+      font-size:0.68rem;font-weight:600;
+      letter-spacing:0.14em;text-transform:uppercase;
+      color:var(--blue-light);margin-bottom:4px;
+    }
+    .tl-title{
+      font-family:'Inter',sans-serif;
+      font-weight:700;font-size:1.1rem;
+      color:var(--blue);margin-bottom:6px;
+    }
+    .tl-body{font-size:0.86rem;color:var(--muted);line-height:1.65;}
+
+    /* ── PILL TAG ── */
+    .pill{
+      display:inline-block;
+      background:var(--grad-soft);color:var(--blue-mid);
+      padding:4px 12px;border-radius:50px;
+      font-size:0.7rem;font-weight:600;letter-spacing:0.06em;
+      margin-right:6px;margin-top:6px;
+    }
+
+    /* ── NEXT SECTION NAV ── */
+    .next-nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:28px 72px;
+      background:var(--blue);
+      border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .next-prev{
+      font-size:0.82rem;color:rgba(255,255,255,0.35);
+      font-weight:500;text-decoration:none;
+      display:flex;align-items:center;gap:8px;
+      transition:color 0.2s;
+    }
+    .next-prev:hover{color:rgba(255,255,255,0.7);}
+    .next-next{
+      font-family:'Inter',sans-serif;
+      font-size:1rem;font-weight:700;
+      color:#fff;text-decoration:none;
+      display:flex;align-items:center;gap:10px;
+      transition:opacity 0.2s;
+    }
+    .next-next:hover{opacity:0.75;}
+    .next-arrow{
+      width:36px;height:36px;border-radius:50%;
+      background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);
+      display:flex;align-items:center;justify-content:center;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+    .fade.in{opacity:1;transform:translateY(0);}
+    .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}
+    .d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- SIDE NAV -->
+<nav class="side-nav">
+  <div class="side-logo">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img src="data:image/png;base64,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" alt="Silicon Slopes" style="width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;"/>
+      <div>
+        <div class="side-logo-top">Start School</div>
+        <div class="side-logo-sub">Silicon Slopes</div>
+      </div>
+    </div>
+  </div>
+  <div class="side-guide-label">Build in Public</div>
+  <ul class="nav-items" id="nav-items">
+    <li class="nav-item active" data-target="hero">
+      <a href="#hero"><span class="nav-num">00</span> Intro</a>
+    </li>
+    <li class="nav-item" data-target="s1">
+      <a href="#s1"><span class="nav-num">01</span> Why it works</a>
+    </li>
+    <li class="nav-item" data-target="s2">
+      <a href="#s2"><span class="nav-num">02</span> What to share</a>
+    </li>
+    <li class="nav-item" data-target="s3">
+      <a href="#s3"><span class="nav-num">03</span> How to write it</a>
+    </li>
+    <li class="nav-item" data-target="s4">
+      <a href="#s4"><span class="nav-num">04</span> Platform guide</a>
+    </li>
+    <li class="nav-item" data-target="s5">
+      <a href="#s5"><span class="nav-num">05</span> Common mistakes</a>
+    </li>
+    <li class="nav-item" data-target="s6">
+      <a href="#s6"><span class="nav-num">06</span> 30-day plan</a>
+    </li>
+    <li class="nav-item" data-target="s7">
+      <a href="#s7"><span class="nav-num">07</span> Your checklist</a>
+    </li>
+  </ul>
+  <div style="padding:16px 24px;border-top:1px solid rgba(255,255,255,0.08);position:relative;z-index:1;">
+    <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.4);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Hub
+    </a>
+  </div>
+  <div class="side-progress">
+    <div class="side-progress-label">Progress</div>
+    <div class="side-progress-bar">
+      <div class="side-progress-fill" id="side-fill"></div>
+    </div>
+    <div class="side-progress-pct" id="side-pct">0%</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-tag">
+      <img src="data:image/png;base64,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" alt="Silicon Slopes" style="width:20px;height:20px;border-radius:50%;object-fit:cover;"/>
+      <span>Start School · Founder Guide</span>
+    </div>
+    <h1>
+      Build<br/>in Public
+      <span>The unfair advantage<br/>that costs nothing.</span>
+    </h1>
+    <p class="hero-sub">
+      You don't need followers to start. You don't need a big idea. You need to show your work — consistently, honestly, and before you're ready. This guide shows you exactly how.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">7 sections</div>
+      <div class="hero-meta-dot"></div>
+      <div class="hero-meta-item">~20 min read</div>
+      <div class="hero-meta-dot"></div>
+      <div class="hero-meta-item">30-day plan included</div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- S1 — WHY IT WORKS -->
+  <section class="guide-section" id="s1">
+    <span class="section-num">01</span>
+    <span class="section-label">Why building in public works</span>
+    <h2 class="section-title">You don't need connections.<br/><em>You need visibility.</em></h2>
+    <p class="section-lead">Most founders wait until they have something perfect to show. Building in public flips that. The process is the product — and the people watching become your first customers, advisors, and advocates.</p>
+
+    <div class="three-col">
+      <div class="card fade">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4>Your audience self-selects</h4>
+        <p>The people who follow your journey already believe in what you're doing. When you're ready to sell, they've been watching you solve the problem for months.</p>
+      </div>
+      <div class="card fade d1">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h4>Feedback before you build</h4>
+        <p>Share the idea, the struggle, the pivot. People will tell you what's wrong before you spend six months building the wrong thing. It's free market research.</p>
+      </div>
+      <div class="card blue fade d2">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h4>Compound interest on trust</h4>
+        <p>Each post is a small deposit. After 90 days of showing up, you've built something no ad budget can buy — a community that trusts you because they watched you earn it.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote fade">
+      <div class="pq-mark">"</div>
+      <p class="pq-text">
+        AI means one person can build what used to take twenty. Building in public means <em>the right twenty people find you</em> while you're building it.
+      </p>
+    </div>
+  </section>
+
+  <!-- S2 — WHAT TO SHARE -->
+  <section class="guide-section alt-bg" id="s2">
+    <span class="section-num">02</span>
+    <span class="section-label">What to share</span>
+    <h2 class="section-title">The content is already<br/><em>happening to you.</em></h2>
+    <p class="section-lead">You don't need to create content. You need to narrate what's already happening. Here's a framework — three types of posts that work at any stage.</p>
+
+    <div class="fw-table fade">
+      <div class="fw-row header">
+        <div class="fw-cell">Type</div>
+        <div class="fw-cell">What it looks like</div>
+        <div class="fw-cell">Why it works</div>
+      </div>
+      <div class="fw-row">
+        <div class="fw-cell"><strong>Progress</strong><br/><span style="font-size:0.75rem;color:var(--muted)">What happened</span></div>
+        <div class="fw-cell">"Week 3 building [product]. Got our first 10 users. Here's what surprised us..."</div>
+        <div class="fw-cell">People root for momentum. Numbers — even small ones — signal real traction.</div>
+      </div>
+      <div class="fw-row">
+        <div class="fw-cell"><strong>Learning</strong><br/><span style="font-size:0.75rem;color:var(--muted)">What you discovered</span></div>
+        <div class="fw-cell">"We thought our customer was X. After 20 interviews, it's actually Y. Here's what changed."</div>
+        <div class="fw-cell">Vulnerability + insight = the most shareable content. Everyone's made the same mistake.</div>
+      </div>
+      <div class="fw-row">
+        <div class="fw-cell"><strong>Decision</strong><br/><span style="font-size:0.75rem;color:var(--muted)">What you chose</span></div>
+        <div class="fw-cell">"We had to choose between X and Y. We picked Y because... What would you have done?"</div>
+        <div class="fw-cell">Invites engagement. Makes followers feel part of your journey, not just observers.</div>
+      </div>
+      <div class="fw-row">
+        <div class="fw-cell"><strong>Behind scenes</strong><br/><span style="font-size:0.75rem;color:var(--muted)">How it's made</span></div>
+        <div class="fw-cell">"Here's the exact AI prompt I use to write customer emails. Saves me 2 hrs/week."</div>
+        <div class="fw-cell">Generosity builds authority faster than showing off. Give the good stuff away.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;" class="fade">
+      <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-light);margin-bottom:20px;">What NOT to share</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div style="padding:16px 18px;background:var(--white);border:1.5px solid #fecaca;border-radius:12px;">
+          <p style="font-size:0.84rem;color:#7f1d1d;font-weight:500;">❌ Your revenue before you have any</p>
+        </div>
+        <div style="padding:16px 18px;background:var(--white);border:1.5px solid #fecaca;border-radius:12px;">
+          <p style="font-size:0.84rem;color:#7f1d1d;font-weight:500;">❌ Vague inspiration ("Working on something big 👀")</p>
+        </div>
+        <div style="padding:16px 18px;background:var(--white);border:1.5px solid #fecaca;border-radius:12px;">
+          <p style="font-size:0.84rem;color:#7f1d1d;font-weight:500;">❌ Competitor comparisons / negativity</p>
+        </div>
+        <div style="padding:16px 18px;background:var(--white);border:1.5px solid #fecaca;border-radius:12px;">
+          <p style="font-size:0.84rem;color:#7f1d1d;font-weight:500;">❌ Customers' private feedback without permission</p>
+        </div>
+        <div style="padding:16px 18px;background:var(--white);border:1.5px solid #fecaca;border-radius:12px;">
+          <p style="font-size:0.84rem;color:#7f1d1d;font-weight:500;">❌ Anything you'd regret in a fundraising meeting</p>
+        </div>
+        <div style="padding:16px 18px;background:var(--white);border:1.5px solid #fecaca;border-radius:12px;">
+          <p style="font-size:0.84rem;color:#7f1d1d;font-weight:500;">❌ Posting once then going silent for 3 weeks</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3 — HOW TO WRITE -->
+  <section class="guide-section" id="s3">
+    <span class="section-num">03</span>
+    <span class="section-label">How to write it</span>
+    <h2 class="section-title">The anatomy of a post<br/><em>people actually read.</em></h2>
+    <p class="section-lead">Most founder posts fail in the first line. Here's the structure that works — with real examples at each stage.</p>
+
+    <div class="two-col">
+      <div>
+        <div style="background:var(--cream);border-radius:18px;padding:28px 26px;margin-bottom:24px;" class="fade">
+          <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-light);margin-bottom:14px;">The formula</p>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.72rem;font-weight:700;color:#fff;">1</div>
+              <div><strong style="color:var(--blue);font-size:0.9rem;">Hook</strong> — one line that stops the scroll. A number, a confession, or a counterintuitive truth.</div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.72rem;font-weight:700;color:#fff;">2</div>
+              <div><strong style="color:var(--blue);font-size:0.9rem;">Context</strong> — 1–2 sentences: who you are, what you're building, why this moment matters.</div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.72rem;font-weight:700;color:#fff;">3</div>
+              <div><strong style="color:var(--blue);font-size:0.9rem;">The thing</strong> — the actual update, insight, or decision. Be specific. Numbers help.</div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.72rem;font-weight:700;color:#fff;">4</div>
+              <div><strong style="color:var(--blue);font-size:0.9rem;">What you learned</strong> — the takeaway. Make it portable so others can apply it to their situation.</div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.72rem;font-weight:700;color:#fff;">5</div>
+              <div><strong style="color:var(--blue);font-size:0.9rem;">Ask or next</strong> — a question to invite replies, or what's coming next week.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <div class="post-example fade d1">
+          <div class="post-header">
+            <div class="post-avatar">J</div>
+            <div>
+              <div class="post-handle">@jess_builds</div>
+              <div class="post-platform">LinkedIn · Week 4 update</div>
+            </div>
+          </div>
+          <div class="post-body">
+            <p class="post-text"><strong>I sent 47 cold emails last week. 3 replied. Here's what I changed.</strong>
+
+Week 4 building my scheduling tool for independent therapists. I've been embarrassed by my reply rate until I looked closer.
+
+The emails that worked had one thing in common: I mentioned a specific problem I saw on their website. Not a generic "I'd love to connect."
+
+New template:
+→ One sentence about their specific situation
+→ One sentence about what I built
+→ One yes/no question
+
+Reply rate went from 6% to 28%.
+
+Next week I'll hit 20 conversations and post the results.
+Anyone else doing cold outreach? What's working?</p>
+            <span class="post-tag">Progress + Learning</span>
+          </div>
+          <div class="post-metrics">
+            <span class="pm"><strong>847</strong> impressions</span>
+            <span class="pm"><strong>34</strong> reactions</span>
+            <span class="pm"><strong>12</strong> comments</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4 — PLATFORMS -->
+  <section class="guide-section alt-bg" id="s4">
+    <span class="section-num">04</span>
+    <span class="section-label">Where to build in public</span>
+    <h2 class="section-title">Pick one platform.<br/><em>Own it before you expand.</em></h2>
+    <p class="section-lead">The worst strategy is posting the same thing everywhere and getting traction nowhere. Here's what each platform is actually for — and which one to start with.</p>
+
+    <div class="three-col fade">
+      <div class="card">
+        <div style="font-size:1.4rem;margin-bottom:12px;">💼</div>
+        <h4>LinkedIn</h4>
+        <p style="margin-bottom:14px;">Best for B2B founders, service businesses, and anyone whose customers are professionals. Long-form posts outperform short ones. Consistency beats virality.</p>
+        <span class="pill">B2B</span>
+        <span class="pill">Service biz</span>
+        <span class="pill">Consultants</span>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:var(--blue-mid);font-weight:600;">Best format: 150–300 word posts, 3x/week</p>
+        </div>
+      </div>
+      <div class="card blue">
+        <div style="font-size:1.4rem;margin-bottom:12px;">🐦</div>
+        <h4>X / Twitter</h4>
+        <p style="margin-bottom:14px;">The original home of #buildinpublic. Best for SaaS, tech products, and founders who want feedback from other founders. Threads drive the most reach.</p>
+        <span class="pill">SaaS</span>
+        <span class="pill">Tech</span>
+        <span class="pill">Dev tools</span>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.12);">
+          <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);font-weight:600;">Best format: threads + daily updates</p>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:1.4rem;margin-bottom:12px;">📷</div>
+        <h4>Instagram / TikTok</h4>
+        <p style="margin-bottom:14px;">If your product is visual or consumer-facing, document the process on video. "Day in the life" and behind-the-scenes content builds personal connection fast.</p>
+        <span class="pill">Consumer</span>
+        <span class="pill">Physical product</span>
+        <span class="pill">Creative</span>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+          <p style="font-size:0.78rem;color:var(--blue-mid);font-weight:600;">Best format: short video, 4–5x/week</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-quote fade" style="margin-top:40px;">
+      <div class="pq-mark">"</div>
+      <p class="pq-text">Start School founders: <em>LinkedIn is your platform.</em> Your customers are professionals. Your mentors are professionals. That's where the deals happen.</p>
+    </div>
+  </section>
+
+  <!-- S5 — MISTAKES -->
+  <section class="guide-section" id="s5">
+    <span class="section-num">05</span>
+    <span class="section-label">Common mistakes</span>
+    <h2 class="section-title">Why most founders<br/><em>quit in week three.</em></h2>
+    <p class="section-lead">Building in public fails for predictable reasons. Here are the six most common — and what to do instead.</p>
+
+    <div style="display:flex;flex-direction:column;gap:14px;" class="fade">
+      <div class="mistake">
+        <div class="mistake-icon x">❌</div>
+        <div>
+          <h5>Waiting until you have something to show</h5>
+          <p>The point is to show the process. "I have no product yet" is not a reason to wait — it's the content. Document the problem you're solving and why you care about it.</p>
+        </div>
+      </div>
+      <div class="mistake">
+        <div class="mistake-icon x">❌</div>
+        <div>
+          <h5>Posting metrics without context</h5>
+          <p>"We hit $1K MRR" means nothing without the story. Why did it take so long? What finally worked? The number is the headline — the lesson is the content.</p>
+        </div>
+      </div>
+      <div class="mistake ok">
+        <div class="mistake-icon check">✓</div>
+        <div>
+          <h5>Consistency beats quality every time</h5>
+          <p>A mediocre post every week for a year outperforms a perfect post every month. The algorithm rewards consistency. More importantly — your audience remembers you exist.</p>
+        </div>
+      </div>
+      <div class="mistake">
+        <div class="mistake-icon x">❌</div>
+        <div>
+          <h5>Only sharing wins</h5>
+          <p>Your wins make people happy. Your failures make people trust you. The founder who admits they mispriced their product and what they did about it gets 5x the engagement.</p>
+        </div>
+      </div>
+      <div class="mistake ok">
+        <div class="mistake-icon check">✓</div>
+        <div>
+          <h5>Reply to every comment, especially early on</h5>
+          <p>Your first 50 followers are gold. Reply to everyone. Ask them questions. Turn observers into participants — they'll become your most loyal advocates when you have something to sell.</p>
+        </div>
+      </div>
+      <div class="mistake">
+        <div class="mistake-icon x">❌</div>
+        <div>
+          <h5>Treating it like broadcasting</h5>
+          <p>Build in public is a conversation, not a press release. Ask questions. Post polls. Comment on other founders' posts. The network you build matters as much as the content.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6 — 30 DAY PLAN -->
+  <section class="guide-section alt-bg" id="s6">
+    <span class="section-num">06</span>
+    <span class="section-label">Your 30-day plan</span>
+    <h2 class="section-title">Start tomorrow.<br/><em>Not when you're ready.</em></h2>
+    <p class="section-lead">Here's a week-by-week plan for your first month. No followers required. No product required. Just an honest account of what you're building and why.</p>
+
+    <div class="two-col">
+      <div class="timeline fade">
+        <div class="tl-item">
+          <div class="tl-dot">1</div>
+          <div class="tl-content">
+            <div class="tl-week">Week 1 — Day 1–7</div>
+            <div class="tl-title">Introduce yourself and the problem</div>
+            <p class="tl-body">Write one post: who you are, what problem you're solving, and why you care about it. Post it. Don't overthink it. This is your origin story — people will reference it later. Then spend the rest of the week commenting on 5 posts a day from founders you respect.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">2</div>
+          <div class="tl-content">
+            <div class="tl-week">Week 2 — Day 8–14</div>
+            <div class="tl-title">Document your customer research</div>
+            <p class="tl-body">Post what you're learning from customer conversations. "I interviewed 8 people this week. Here's the one thing they all said that surprised me." Share the insight, not just the fact that you did interviews.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">3</div>
+          <div class="tl-content">
+            <div class="tl-week">Week 3 — Day 15–21</div>
+            <div class="tl-title">Share a decision you had to make</div>
+            <p class="tl-body">What was the hardest choice you made this week? Pricing, positioning, who to build for first? Walk through the decision. Ask your audience what they would have done. Engagement will be 3x a regular post.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">4</div>
+          <div class="tl-content">
+            <div class="tl-week">Week 4 — Day 22–30</div>
+            <div class="tl-title">Post your first monthly recap</div>
+            <p class="tl-body">What happened in month one? What did you expect vs. what actually happened? Metrics, learnings, what's next. This is your most important post — it anchors your credibility and gives new followers a reason to follow your next chapter.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px;" class="fade d2">
+        <div class="post-example">
+          <div class="post-header">
+            <div class="post-avatar">M</div>
+            <div>
+              <div class="post-handle">@marcus_founder</div>
+              <div class="post-platform">LinkedIn · Month 1 recap</div>
+            </div>
+          </div>
+          <div class="post-body">
+            <p class="post-text"><strong>30 days of building in public. Here's what actually happened.</strong>
+
+Month 1 numbers:
+→ 12 posts published
+→ 423 new followers
+→ 6 customer calls booked from DMs
+→ 1 paying customer (!!!)
+
+What I expected: silence.
+What happened: three people who saw my week-2 post introduced me to their network.
+
+The post that drove everything? Not my best writing. It was the one where I admitted my first pricing was completely wrong.
+
+Lesson: People don't share your wins. They share your honesty.
+
+Month 2 goal: 20 customer conversations, first 5 paid pilots.
+
+Who else is doing this? Drop a comment — I'll follow you back.</p>
+            <span class="post-tag">Monthly Recap</span>
+          </div>
+          <div class="post-metrics">
+            <span class="pm"><strong>4.2K</strong> impressions</span>
+            <span class="pm"><strong>186</strong> reactions</span>
+            <span class="pm"><strong>47</strong> comments</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S7 — CHECKLIST -->
+  <section class="guide-section" id="s7">
+    <span class="section-num">07</span>
+    <span class="section-label">Your starter checklist</span>
+    <h2 class="section-title">Before you post<br/><em>your first update.</em></h2>
+    <p class="section-lead">Click each item as you complete it. This is your pre-launch checklist — everything you need before week one.</p>
+
+    <div class="two-col">
+      <div class="checklist" id="checklist">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+          <span class="check-text"><strong>Choose your platform</strong> — LinkedIn if B2B, X if tech/SaaS, IG/TikTok if consumer. One only.</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+          <span class="check-text"><strong>Optimize your bio</strong> — "Building [product] for [customer]. Sharing the journey." That's it.</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+          <span class="check-text"><strong>Write your origin post</strong> — Who you are, what you're building, why you care. Under 200 words.</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+          <span class="check-text"><strong>Find 10 accounts to follow</strong> — Other founders at your stage. Comment on their posts this week.</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+          <span class="check-text"><strong>Block 30 min/week</strong> — Put it in your calendar. This is a meeting with your future customers.</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+          <span class="check-text"><strong>Define what "success" looks like in 30 days</strong> — Not followers. Conversations. Aim for 5 DMs from potential customers.</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>
+          <span class="check-text"><strong>Post your first update</strong> — Even if no one sees it. The habit is the point in month one.</span>
+        </div>
+      </div>
+      <div class="fade d2">
+        <div class="card blue" style="margin-bottom:20px;">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h4>The only metric that matters in month one</h4>
+          <p>Not impressions. Not followers. Did a stranger DM you because of something you posted? That's one potential customer. That's the whole point.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h4>How long until it "works"?</h4>
+          <p>Most founders who stick with it see meaningful traction between month 3 and 6. The ones who quit after 4 posts never find out. Consistency is the only secret.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="next-nav">
+    <a href="#s6" class="next-prev">
+      ← Back to 30-day plan
+    </a>
+    <a href="https://www.siliconslopes.com/start-school" target="_blank" class="next-next">
+      Apply to Start School
+      <div class="next-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  // Progress + nav active state
+  const sections = ['hero','s1','s2','s3','s4','s5','s6','s7'];
+  const navItems = document.querySelectorAll('.nav-item');
+  const fill = document.getElementById('side-fill');
+  const pct = document.getElementById('side-pct');
+  const bar = document.getElementById('progress-bar');
+
+  function updateScroll(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = Math.min(100, (scrollTop / docHeight) * 100);
+    bar.style.width = progress + '%';
+    fill.style.width = progress + '%';
+    pct.textContent = Math.round(progress) + '%';
+
+    // active section
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if(el && el.getBoundingClientRect().top <= 120) current = id;
+    });
+    navItems.forEach(item => {
+      item.classList.toggle('active', item.dataset.target === current);
+    });
+  }
+
+  // Intersection observer for fade
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Checklist
+  function toggleCheck(el){ el.classList.toggle('done'); }
+
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+</script>
+</body>
+</html>
