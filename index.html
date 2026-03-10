@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Start School — Resource Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --white:    #FFFFFF;
+  --cream:    #F5F0E8;
+  --cream-2:  #EDE8DF;
+  --ink:      #0F1825;
+  --ink-2:    #1A2535;
+  --text:     #1A2535;
+  --muted:    #6B7A8D;
+  --border:   #E2DDD4;
+  --blue:     #1A5FD4;
+  --blue-2:   #2B72F5;
+  --blue-light: #EEF4FF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--white);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:64px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo img{width:32px;height:32px;border-radius:50%;object-fit:cover;}
+.nav-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--ink);letter-spacing:-0.02em;}
+.nav-brand span{color:var(--muted);font-weight:500;}
+.nav-divider{width:1px;height:16px;background:var(--border);margin:0 4px;}
+.nav-hub{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);}
+.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-link{font-size:0.82rem;font-weight:500;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-link:hover{color:var(--text);}
+.nav-badge{font-size:0.7rem;font-weight:600;padding:5px 12px;border-radius:50px;background:var(--blue-light);color:var(--blue);border:1px solid rgba(26,95,212,0.15);}
+
+/* HERO */
+.hero{
+  padding:140px 48px 100px;
+  background:var(--white);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
+/* subtle mountain watermark */
+.hero-mountain{
+  position:absolute;bottom:0;left:0;right:0;
+  opacity:0.04;pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue-light);border:1px solid rgba(26,95,212,0.2);
+  padding:6px 16px;border-radius:50px;
+  font-size:0.7rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--blue);
+  margin-bottom:28px;
+  opacity:0;transform:translateY(16px);
+  animation:fadeUp 0.6s ease 0.1s forwards;
+}
+.hero-title{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:clamp(2.4rem,5vw,4.2rem);
+  line-height:1.05;letter-spacing:-0.04em;
+  color:var(--ink);margin-bottom:20px;
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp 0.7s ease 0.25s forwards;
+}
+.hero-title em{
+  font-style:normal;
+  background:linear-gradient(135deg,#1A5FD4,#2B72F5);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:1.05rem;color:var(--muted);max-width:500px;margin:0 auto 56px;line-height:1.75;
+  opacity:0;transform:translateY(16px);
+  animation:fadeUp 0.7s ease 0.4s forwards;
+}
+
+/* TWO BIG CTAs */
+.hero-choices{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  max-width:760px;margin:0 auto;
+  opacity:0;transform:translateY(16px);
+  animation:fadeUp 0.7s ease 0.55s forwards;
+}
+.choice-card{
+  border-radius:18px;padding:40px 36px;
+  text-decoration:none;
+  display:flex;flex-direction:column;align-items:flex-start;
+  transition:transform 0.2s,box-shadow 0.2s;
+  position:relative;overflow:hidden;
+  text-align:left;
+}
+.choice-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.1);}
+.choice-card.dark{
+  background:var(--ink);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.choice-card.light{
+  background:var(--cream);
+  border:1px solid var(--border);
+}
+.choice-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:24px;
+}
+.choice-card.dark .choice-icon{background:rgba(59,139,255,0.15);}
+.choice-card.light .choice-icon{background:rgba(26,95,212,0.08);}
+.choice-icon svg{width:24px;height:24px;}
+.choice-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.4rem;letter-spacing:-0.03em;margin-bottom:10px;
+}
+.choice-card.dark .choice-title{color:#fff;}
+.choice-card.light .choice-title{color:var(--ink);}
+.choice-desc{font-size:0.85rem;line-height:1.65;margin-bottom:28px;}
+.choice-card.dark .choice-desc{color:rgba(255,255,255,0.5);}
+.choice-card.light .choice-desc{color:var(--muted);}
+.choice-cta{
+  font-size:0.82rem;font-weight:600;
+  display:flex;align-items:center;gap:6px;
+  transition:gap 0.2s;
+}
+.choice-card:hover .choice-cta{gap:10px;}
+.choice-card.dark .choice-cta{color:#5BA3FF;}
+.choice-card.light .choice-cta{color:var(--blue);}
+/* Mountain in dark card */
+.choice-mountain{
+  position:absolute;bottom:0;right:0;opacity:0.07;pointer-events:none;
+}
+
+/* SOCIAL PROOF */
+.social-row{
+  display:flex;align-items:center;justify-content:center;gap:40px;
+  margin-top:72px;padding-top:48px;
+  border-top:1px solid var(--border);
+  opacity:0;transform:translateY(12px);
+  animation:fadeUp 0.7s ease 0.7s forwards;
+}
+.social-item{text-align:center;}
+.social-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--ink);letter-spacing:-0.03em;}
+.social-lbl{font-size:0.72rem;color:var(--muted);margin-top:2px;letter-spacing:0.03em;}
+.social-div{width:1px;height:36px;background:var(--border);}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);padding:32px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--white);
+}
+.footer-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.footer-logo img{width:24px;height:24px;border-radius:50%;object-fit:cover;}
+.footer-logo-text{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:var(--ink);}
+.footer-text{font-size:0.75rem;color:var(--muted);}
+.footer-link{font-size:0.75rem;color:var(--blue);text-decoration:none;}
+.footer-link:hover{text-decoration:underline;}
+
+@media(max-width:700px){
+  nav{padding:0 20px;}
+  .hero{padding:100px 20px 60px;}
+  .hero-choices{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="data:image/jpeg;base64,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" alt="Silicon Slopes"/>
+    <div class="nav-brand">Start School <span>by Silicon Slopes</span></div>
+    <div class="nav-divider"></div>
+    <span class="nav-hub">Resource Hub</span>
+  </a>
+  <div class="nav-right">
+    <a href="resources.html" class="nav-link">Resources</a>
+    <a href="slope-mvp.html" class="nav-link">Slopes AI</a>
+    <span class="nav-badge">Free · Open access</span>
+  </div>
+</nav>
+
+<section class="hero">
+  <!-- Mountain watermark -->
+  <svg class="hero-mountain" viewBox="0 0 1440 320" preserveAspectRatio="none" fill="none">
+    <path d="M0 320 L0 200 L120 140 L240 170 L360 100 L480 130 L560 70 L640 95 L720 40 L800 70 L880 50 L960 80 L1080 110 L1200 80 L1320 120 L1440 100 L1440 320 Z" fill="#1A2535"/>
+    <path d="M720 40 L695 80 L745 80 Z" fill="#1A2535"/>
+    <path d="M560 70 L545 98 L575 98 Z" fill="#1A2535"/>
+  </svg>
+
+  <div style="position:relative;z-index:1;max-width:900px;margin:0 auto;">
+    <div class="hero-badge">
+      Entrepreneurship for the 99% · Free · No equity
+    </div>
+    <h1 class="hero-title">
+      Everything you need<br/>to <em>just start.</em>
+    </h1>
+    <p class="hero-sub">
+      Interactive guides, AI co-founder support, and founder resources — built for the Silicon Slopes community. No tuition. No equity. No gatekeeping.
+    </p>
+
+    <div class="hero-choices">
+      <!-- SLOPES AI card -->
+      <a href="slope-mvp.html" class="choice-card dark">
+        <svg class="choice-mountain" width="200" height="150" viewBox="0 0 200 150" fill="none">
+          <path d="M0 150 L0 80 L50 40 L80 60 L100 20 L120 50 L150 30 L200 70 L200 150 Z" fill="white"/>
+          <path d="M100 20 L88 45 L112 45 Z" fill="white"/>
+        </svg>
+        <div class="choice-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#5BA3FF" stroke-width="1.8">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="choice-title">Talk to Slopes</div>
+        <div class="choice-desc">Your AI co-founder — trained on Silicon Slopes culture, Start School frameworks, and the Utah ecosystem. Available at 11pm on a Tuesday.</div>
+        <div class="choice-cta">
+          <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+            <path d="M2 26 L10 10 L14 16 L19 8 L30 26 Z" stroke="#5BA3FF" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M19 8 L16.5 12.5 L21.5 12.5 Z" fill="#5BA3FF"/>
+          </svg>
+          Open Slopes AI →
+        </div>
+      </a>
+
+      <!-- RESOURCES card -->
+      <a href="resources.html" class="choice-card light">
+        <div class="choice-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1A5FD4" stroke-width="1.8">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        <div class="choice-title">Browse Resources</div>
+        <div class="choice-desc">Interactive guides on MVP, Build in Public, finding your first customer, pricing, and more — each one built for the real founder journey.</div>
+        <div class="choice-cta" style="color:var(--blue);">
+          See all guides →
+        </div>
+      </a>
+    </div>
+
+    <div class="social-row">
+      <div class="social-item">
+        <div class="social-num">2</div>
+        <div class="social-lbl">Guides live now</div>
+      </div>
+      <div class="social-div"></div>
+      <div class="social-item">
+        <div class="social-num">$0</div>
+        <div class="social-lbl">Cost to access</div>
+      </div>
+      <div class="social-div"></div>
+      <div class="social-item">
+        <div class="social-num">∞</div>
+        <div class="social-lbl">Growing each cohort</div>
+      </div>
+      <div class="social-div"></div>
+      <div class="social-item">
+        <div class="social-num">99%</div>
+        <div class="social-lbl">For every founder</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="#">
+    <img src="data:image/jpeg;base64,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" alt="Silicon Slopes"/>
+    <span class="footer-logo-text">Start School <span style="font-weight:400;color:#6B7A8D;">by Silicon Slopes</span></span>
+  </a>
+  <span class="footer-text">© 2026 · Free · Open access · No equity</span>
+  <a href="https://www.siliconslopes.com/start-school" target="_blank" class="footer-link">Apply to Start School ↗</a>
+</footer>
+
+</body>
+</html>
