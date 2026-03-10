@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Resources — Start School</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --white:      #FFFFFF;
+  --cream:      #F6F1E9;
+  --cream-2:    #EDE7DC;
+  --cream-3:    #E5DED3;
+  --ink:        #0F1825;
+  --text:       #1C2B3A;
+  --muted:      #6B7A8D;
+  --muted-2:    #94A3B8;
+  --border:     #DDD8CF;
+  --blue:       #1A5FD4;
+  --blue-2:     #2B72F5;
+  --blue-bg:    #EEF4FF;
+  --blue-border: rgba(26,95,212,0.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cream);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:16px; line-height:1.6;
+}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--cream);}
+::-webkit-scrollbar-thumb{background:var(--cream-3);border-radius:2px;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:64px;
+  background:rgba(246,241,233,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-left{display:flex;align-items:center;gap:12px;}
+.nav-back{
+  display:flex;align-items:center;gap:6px;
+  font-size:0.8rem;font-weight:500;color:var(--muted);
+  text-decoration:none;transition:color 0.2s;
+  padding-right:12px;border-right:1px solid var(--border);
+  margin-right:4px;
+}
+.nav-back:hover{color:var(--text);}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.nav-logo img{width:30px;height:30px;border-radius:50%;object-fit:cover;}
+.nav-brand{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:var(--ink);letter-spacing:-0.02em;}
+.nav-brand span{color:var(--muted);font-weight:400;}
+.nav-section{font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);padding:4px 10px;background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:6px;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-slopes-btn{
+  background:var(--ink);color:#fff;
+  font-size:0.78rem;font-weight:600;
+  padding:7px 16px;border-radius:8px;
+  text-decoration:none;
+  display:flex;align-items:center;gap:6px;
+  transition:background 0.2s;
+}
+.nav-slopes-btn:hover{background:var(--blue);}
+
+/* HERO */
+.page-hero{
+  padding:120px 48px 64px;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+}
+.page-hero-inner{max-width:1080px;margin:0 auto;}
+.page-label{
+  display:inline-block;
+  font-size:0.68rem;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:14px;
+}
+.page-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2rem,4vw,3.2rem);
+  letter-spacing:-0.04em;color:var(--ink);
+  margin-bottom:14px;line-height:1.08;
+}
+.page-sub{font-size:1rem;color:var(--muted);max-width:520px;line-height:1.7;}
+
+/* SEARCH */
+.search-bar{
+  margin-top:36px;
+  display:flex;align-items:center;gap:12px;
+}
+.search-input-wrap{
+  position:relative;flex:1;max-width:420px;
+}
+.search-input-wrap svg{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;stroke:var(--muted-2);
+}
+.search-input{
+  width:100%;
+  background:var(--cream);border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px 10px 40px;
+  font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--text);
+  outline:none;transition:border-color 0.2s;
+}
+.search-input:focus{border-color:var(--blue);background:var(--white);}
+.search-input::placeholder{color:var(--muted-2);}
+.filter-btns{display:flex;gap:8px;}
+.filter-btn{
+  background:transparent;border:1px solid var(--border);
+  padding:8px 16px;border-radius:8px;
+  font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;
+  color:var(--muted);cursor:pointer;transition:all 0.2s;
+}
+.filter-btn.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+.filter-btn:hover:not(.active){border-color:var(--blue);color:var(--blue);}
+
+/* MAIN CONTENT */
+.content{padding:56px 48px 80px;max-width:1080px;margin:0 auto;}
+
+/* SECTION HEADS */
+.sec-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:24px;margin-top:56px;
+}
+.sec-head:first-child{margin-top:0;}
+.sec-head-title{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:1rem;color:var(--ink);letter-spacing:-0.01em;
+}
+.sec-head-count{font-size:0.8rem;color:var(--muted-2);}
+
+/* FEATURED */
+.featured-card{
+  display:grid;grid-template-columns:1fr auto;
+  background:var(--ink);border-radius:16px;
+  padding:40px 44px;text-decoration:none;
+  margin-bottom:40px;
+  transition:transform 0.2s,box-shadow 0.2s;
+  position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.featured-card:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.fc-mountain{position:absolute;right:0;bottom:0;opacity:0.06;pointer-events:none;}
+.fc-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(59,139,255,0.15);border:1px solid rgba(59,139,255,0.25);
+  padding:4px 12px;border-radius:50px;
+  font-size:0.65rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:#5BA3FF;
+  margin-bottom:16px;
+}
+.fc-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.9rem;color:#fff;letter-spacing:-0.035em;
+  margin-bottom:12px;
+}
+.fc-desc{font-size:0.88rem;color:rgba(255,255,255,0.5);max-width:480px;line-height:1.7;margin-bottom:24px;}
+.fc-meta{display:flex;gap:20px;}
+.fc-meta-item{font-size:0.75rem;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:5px;}
+.fc-meta-item svg{width:11px;height:11px;stroke:currentColor;}
+.fc-cta-col{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;position:relative;z-index:1;}
+.fc-new{
+  background:rgba(59,139,255,0.15);border:1px solid rgba(59,139,255,0.25);
+  padding:4px 12px;border-radius:6px;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.1em;color:#5BA3FF;
+}
+.fc-btn{
+  background:var(--blue-2);color:#fff;
+  font-size:0.82rem;font-weight:600;
+  padding:11px 22px;border-radius:9px;
+  text-decoration:none;transition:background 0.2s;
+  white-space:nowrap;
+}
+.fc-btn:hover{background:#4B8AFF;}
+
+/* GUIDE GRID */
+.guides-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  margin-bottom:48px;
+}
+.guide-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:14px;padding:28px 26px;
+  text-decoration:none;
+  display:flex;flex-direction:column;
+  transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;
+  position:relative;
+}
+.guide-card:not(.coming):hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.08);
+  border-color:rgba(26,95,212,0.25);
+}
+.guide-card.coming{cursor:default;opacity:0.6;}
+.gc-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--blue-bg);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+}
+.gc-icon svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:1.8;}
+.gc-type{
+  font-size:0.62rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:8px;
+}
+.gc-title{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:1rem;color:var(--ink);letter-spacing:-0.02em;
+  margin-bottom:8px;
+}
+.gc-desc{font-size:0.82rem;color:var(--muted);line-height:1.65;flex:1;}
+.gc-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:20px;padding-top:16px;
+  border-top:1px solid var(--border);
+}
+.gc-meta{font-size:0.72rem;color:var(--muted-2);display:flex;align-items:center;gap:4px;}
+.gc-meta svg{width:11px;height:11px;stroke:currentColor;fill:none;}
+.gc-arrow{
+  width:28px;height:28px;border-radius:8px;
+  background:var(--blue-bg);
+  display:flex;align-items:center;justify-content:center;
+}
+.gc-arrow svg{width:12px;height:12px;stroke:var(--blue);fill:none;stroke-width:2;}
+.coming-pill{
+  background:var(--cream-2);color:var(--muted);
+  font-size:0.65rem;font-weight:600;letter-spacing:0.06em;
+  padding:3px 10px;border-radius:6px;
+}
+
+/* SLOPES PROMO */
+.slopes-promo{
+  background:var(--ink);border-radius:16px;
+  padding:48px 52px;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;
+  margin-top:16px;
+  position:relative;overflow:hidden;
+}
+.sp-mountain{position:absolute;right:0;top:0;bottom:0;opacity:0.06;pointer-events:none;}
+.sp-left{flex:1;position:relative;z-index:1;}
+.sp-label{
+  font-size:0.65rem;font-weight:600;letter-spacing:0.14em;
+  text-transform:uppercase;color:#5BA3FF;margin-bottom:12px;
+}
+.sp-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.6rem;color:#fff;letter-spacing:-0.03em;
+  margin-bottom:12px;line-height:1.2;
+}
+.sp-desc{font-size:0.88rem;color:rgba(255,255,255,0.45);line-height:1.7;max-width:420px;}
+.sp-btn{
+  background:var(--blue-2);color:#fff;
+  font-size:0.88rem;font-weight:600;
+  padding:13px 28px;border-radius:10px;
+  text-decoration:none;white-space:nowrap;
+  transition:background 0.2s,transform 0.15s;
+  display:flex;align-items:center;gap:8px;
+  position:relative;z-index:1;
+  flex-shrink:0;
+}
+.sp-btn:hover{background:#4B8AFF;transform:translateY(-1px);}
+
+/* EMPTY STATE */
+#empty-state{display:none;text-align:center;padding:80px 0;}
+.es-icon{font-size:2.5rem;margin-bottom:12px;}
+.es-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:var(--ink);margin-bottom:6px;}
+.es-sub{font-size:0.85rem;color:var(--muted);}
+
+/* FADE ANIMATION */
+.fade{opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.fade.in{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.06s;}.d2{transition-delay:0.12s;}.d3{transition-delay:0.18s;}
+.d4{transition-delay:0.24s;}.d5{transition-delay:0.30s;}.d6{transition-delay:0.36s;}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);padding:32px 48px;
+  background:var(--white);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.footer-logo img{width:24px;height:24px;border-radius:50%;object-fit:cover;}
+.footer-logo-text{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:var(--ink);}
+.footer-text{font-size:0.75rem;color:var(--muted);}
+.footer-link{font-size:0.75rem;color:var(--blue);text-decoration:none;}
+.footer-link:hover{text-decoration:underline;}
+
+@media(max-width:900px){
+  nav{padding:0 20px;}
+  .page-hero,.content{padding-left:20px;padding-right:20px;}
+  .guides-grid{grid-template-columns:1fr;}
+  .featured-card{grid-template-columns:1fr;}
+  .fc-cta-col{flex-direction:row;align-items:center;margin-top:24px;}
+  .slopes-promo{flex-direction:column;padding:36px 28px;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Hub
+    </a>
+    <a class="nav-logo" href="index.html">
+      <img src="data:image/jpeg;base64,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" alt="Silicon Slopes"/>
+      <span class="nav-brand">Start School <span>by Silicon Slopes</span></span>
+    </a>
+    <span class="nav-section">Resources</span>
+  </div>
+  <div class="nav-right">
+    <a href="slope-mvp.html" class="nav-slopes-btn">
+      <svg width="14" height="14" viewBox="0 0 32 32" fill="none">
+        <path d="M2 26 L10 10 L14 16 L19 8 L30 26 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M19 8 L16.5 12.5 L21.5 12.5 Z" fill="white"/>
+      </svg>
+      Talk to Slopes
+    </a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-label">Founder Resources</span>
+    <h1 class="page-title">Guides built for<br/>the real journey</h1>
+    <p class="page-sub">Interactive, navigable, and actionable — not PDFs. Each guide is a framework you can actually use on day one.</p>
+
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="search-input" placeholder="Search guides, topics…" oninput="filterCards()"/>
+      </div>
+      <div class="filter-btns">
+        <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+        <button class="filter-btn" onclick="setFilter('live',this)">Available now</button>
+        <button class="filter-btn" onclick="setFilter('coming',this)">Coming soon</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- FEATURED -->
+  <div class="sec-head fade">
+    <span class="sec-head-title">Featured</span>
+  </div>
+
+  <a href="startschool-mvp-mlp-map.html" class="featured-card fade" data-status="live" data-tags="mvp mlp map product build launch validate">
+    <svg class="fc-mountain" width="320" height="240" viewBox="0 0 320 240" fill="none">
+      <path d="M0 240 L0 140 L60 90 L100 115 L160 50 L220 90 L270 65 L320 100 L320 240 Z" fill="white"/>
+      <path d="M160 50 L144 82 L176 82 Z" fill="white"/>
+    </svg>
+    <div style="position:relative;z-index:1;">
+      <div class="fc-tag">
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Interactive Guide
+      </div>
+      <div class="fc-title">MVP, MLP & MAP</div>
+      <div class="fc-desc">From viable to lovable — and beyond. Three frameworks every founder needs before building anything. Stop overbuilding, start validating.</div>
+      <div class="fc-meta">
+        <div class="fc-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> 18 min read</div>
+        <div class="fc-meta-item"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg> 7 sections</div>
+        <div class="fc-meta-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg> PDF illustrations included</div>
+      </div>
+    </div>
+    <div class="fc-cta-col">
+      <span class="fc-new">New</span>
+      <a class="fc-btn" href="startschool-mvp-mlp-map.html">Read guide →</a>
+    </div>
+  </a>
+
+  <!-- ALL GUIDES -->
+  <div class="sec-head fade">
+    <span class="sec-head-title">All guides</span>
+    <span class="sec-head-count">2 available · 5 coming soon</span>
+  </div>
+
+  <div class="guides-grid" id="guides-grid">
+
+    <a href="startschool-build-in-public.html" class="guide-card fade d1" data-status="live" data-tags="public audience linkedin content build share">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="gc-type">Interactive Guide</div>
+      <div class="gc-title">Build in Public</div>
+      <div class="gc-desc">The unfair advantage that costs nothing. Grow an audience and attract customers by sharing your journey — before you have anything to sell.</div>
+      <div class="gc-bottom">
+        <span class="gc-meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> 20 min</span>
+        <div class="gc-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </a>
+
+    <a href="startschool-mvp-mlp-map.html" class="guide-card fade d2" data-status="live" data-tags="mvp mlp map product build launch validate">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="gc-type">Interactive Guide</div>
+      <div class="gc-title">MVP, MLP & MAP</div>
+      <div class="gc-desc">Three frameworks every founder needs before building anything. The difference between them isn't quality — it's objective.</div>
+      <div class="gc-bottom">
+        <span class="gc-meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> 18 min</span>
+        <div class="gc-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </a>
+
+    <div class="guide-card coming fade d3" data-status="coming" data-tags="customer validation sales outreach find">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+      <div class="gc-type">Interactive Guide</div>
+      <div class="gc-title">Find Your First Customer</div>
+      <div class="gc-desc">Who they are, where they are, how to reach them — before you've built anything.</div>
+      <div class="gc-bottom">
+        <span class="gc-meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> ~25 min</span>
+        <span class="coming-pill">Coming soon</span>
+      </div>
+    </div>
+
+    <div class="guide-card coming fade d4" data-status="coming" data-tags="pricing revenue business model charge">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="gc-type">Interactive Guide</div>
+      <div class="gc-title">Price Your Product</div>
+      <div class="gc-desc">The mistake most founders make — and how to charge what you're actually worth from day one.</div>
+      <div class="gc-bottom">
+        <span class="gc-meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> ~20 min</span>
+        <span class="coming-pill">Coming soon</span>
+      </div>
+    </div>
+
+    <div class="guide-card coming fade d5" data-status="coming" data-tags="ai tools automation productivity build">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="gc-type">Interactive Guide</div>
+      <div class="gc-title">Build with AI</div>
+      <div class="gc-desc">How one person can now do what used to take a team of twenty — tool by tool, prompt by prompt.</div>
+      <div class="gc-bottom">
+        <span class="gc-meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> ~30 min</span>
+        <span class="coming-pill">Coming soon</span>
+      </div>
+    </div>
+
+    <div class="guide-card coming fade d6" data-status="coming" data-tags="go to market gtm launch sales">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <div class="gc-type">Interactive Guide</div>
+      <div class="gc-title">Go-to-Market in 30 Days</div>
+      <div class="gc-desc">A week-by-week action plan for your first month of customer acquisition — channel by channel.</div>
+      <div class="gc-bottom">
+        <span class="gc-meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> ~25 min</span>
+        <span class="coming-pill">Coming soon</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="empty-state">
+    <div class="es-icon">🔍</div>
+    <div class="es-title">No results</div>
+    <div class="es-sub">Try a different search term.</div>
+  </div>
+
+  <!-- SLOPES PROMO -->
+  <div class="slopes-promo fade">
+    <svg class="sp-mountain" width="400" height="300" viewBox="0 0 400 300" fill="none">
+      <path d="M0 300 L0 160 L80 100 L130 130 L200 60 L270 100 L320 75 L400 120 L400 300 Z" fill="white"/>
+      <path d="M200 60 L182 98 L218 98 Z" fill="white"/>
+    </svg>
+    <div class="sp-left">
+      <div class="sp-label">Slopes AI · Free during cohort</div>
+      <div class="sp-title">Need to think through<br/>your next move?</div>
+      <div class="sp-desc">Slopes is your AI co-founder — trained on Silicon Slopes culture and Start School frameworks. Ask anything about validation, pricing, outreach, or strategy.</div>
+    </div>
+    <a href="slope-mvp.html" class="sp-btn">
+      <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+        <path d="M2 26 L10 10 L14 16 L19 8 L30 26 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M19 8 L16.5 12.5 L21.5 12.5 Z" fill="white"/>
+      </svg>
+      Talk to Slopes →
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <a class="footer-logo" href="index.html">
+    <img src="data:image/jpeg;base64,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" alt="Silicon Slopes"/>
+    <span class="footer-logo-text">Start School <span style="font-weight:400;color:#6B7A8D;">by Silicon Slopes</span></span>
+  </a>
+  <span class="footer-text">© 2026 · Free · Open access · No equity</span>
+  <a href="https://www.siliconslopes.com/start-school" target="_blank" class="footer-link">Apply to Start School ↗</a>
+</footer>
+
+<script>
+let activeFilter = 'all';
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCards();
+}
+function filterCards() {
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('#guides-grid [data-status], .featured-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const status = card.dataset.status;
+    const tags = (card.dataset.tags||'') + ' ' + (card.querySelector('.gc-title,.fc-title')?.textContent||'').toLowerCase();
+    const matchFilter = activeFilter === 'all' || status === activeFilter;
+    const matchQ = q === '' || tags.includes(q);
+    const show = matchFilter && matchQ;
+    card.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+  document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+}
+// Scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
